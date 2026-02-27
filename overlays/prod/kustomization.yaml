@@ -2,11 +2,14 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 namespace: tsumnsso-prod
 resources:
-  - namespace.yaml
-  - secret.yaml
-  - ../../base
+- namespace.yaml
+- secret.yaml
+- ../../base
 patches:
-  - path: domain.json
-    target:
-      kind: Ingress
-      name: sso-ingress
+- path: domain.json
+  target:
+    kind: Ingress
+    name: sso-ingress
+images:
+- name: tsungmnli/tsumnsso
+  newTag: 74db16c0259ec62ad66e27b3093a5d831364f53b
