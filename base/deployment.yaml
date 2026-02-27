@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sso-deployment
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sso
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sso
+    spec:
+      containers:
+        - image: tsungmnli/tsumnsso
+          imagePullPolicy: Always
+          name: sso
+          ports:
+            - containerPort: 8080
+          envFrom:
+            - secretRef:
+                name: tsumnsso-secret
